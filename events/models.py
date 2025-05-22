@@ -21,7 +21,7 @@ class ExtraEvent(models.Model):
 
 
 
-from django.db import models
+
 from recurrence.fields import RecurrenceField
 from recurrence import Recurrence, Rule, DAILY
 # другие импорты…

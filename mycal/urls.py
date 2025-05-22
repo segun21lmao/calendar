@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from events.views import next7 
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),            
     path('calendar/', include('schedule.urls')),
+    path('next7/', next7, name='next7'),
 ]
