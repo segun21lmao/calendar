@@ -18,12 +18,4 @@ admin.site.register(Event, EventAdmin)
 
 
 
-
-from recurrence.forms import RecurrenceWidget
-from recurrence.fields import RecurrenceField
-from .models import FancyEvent
-
-@admin.register(FancyEvent)
-class FancyEventAdmin(admin.ModelAdmin):
-    formfield_overrides = {RecurrenceField: {'widget': RecurrenceWidget}}
 # Register your models here.
