@@ -7,6 +7,7 @@ class ExtraEventInline(admin.StackedInline):
     model = ExtraEvent
     max_num = 1
     extra = 0
+    fields = ('address', 'lesson_type', 'color')
 
 class EventAdmin(ScheduleEventAdmin):
     inlines = [ExtraEventInline]
