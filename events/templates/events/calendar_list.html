@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Календари{% endblock %}
+{% block content %}
+<h1>Список календарей</h1>
+<ul class="list-group">
+  {% for c in calendars %}
+    <li class="list-group-item d-flex justify-content-between">
+        <span>{{ c.name }}</span>
+        <a href="{% url 'create_event' c.id %}"
+           class="btn btn-sm btn-primary">+ Событие</a>
+    </li>
+  {% empty %}
+    <li class="list-group-item">Пока нет календарей.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
