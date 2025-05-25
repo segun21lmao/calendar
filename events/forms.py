@@ -1,4 +1,4 @@
-from schedule.models import Calendar
+from schedule.models import Calendar, Event
 from django import forms
 from colorfield.widgets import ColorWidget
 from .models import ExtraEvent

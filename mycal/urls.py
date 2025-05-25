@@ -15,13 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from events.views import next7 
-
-
+from django.urls import include, path
+from events.views import next7          # если next7 действительно в events/views.py
 
 urlpatterns = [
-    path('admin/', admin.site.urls),            
+    path('', include('events.urls')),   # ← корневые страницы вашего приложения
+    path('admin/', admin.site.urls),
     path('calendar/', include('schedule.urls')),
-    path('next7/', next7, name='next7'),
+    path('next7/', next7, name='next7'),  # уберите эту строку, если next7 не нужно
 ]
