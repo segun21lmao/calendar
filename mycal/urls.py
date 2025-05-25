@@ -19,7 +19,7 @@ from django.urls import include, path
 from events.views import next7          # если next7 действительно в events/views.py
 
 urlpatterns = [
-    path('', include('events.urls')),   # ← корневые страницы вашего приложения
+    path('',  include('events.urls')),   # ← корневые страницы вашего приложения
     path('admin/', admin.site.urls),
     path('calendar/', include('schedule.urls')),
     path('next7/', next7, name='next7'),  # уберите эту строку, если next7 не нужно
