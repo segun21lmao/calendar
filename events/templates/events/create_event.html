@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Новое событие{% endblock %}
+{% block content %}
+<h1>Новое событие: {{ calendar.name }}</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <fieldset class="border p-3 mb-3">
+      <legend class="float-none w-auto">Основное</legend>
+      {{ event_form.as_p }}
+  </fieldset>
+
+  <fieldset class="border p-3 mb-3">
+      <legend class="float-none w-auto">Дополнительно</legend>
+      {{ extra_form.as_p }}
+  </fieldset>
+
+  <button class="btn btn-success">Сохранить</button>
+</form>
+{% endblock %}

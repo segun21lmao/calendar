@@ -12,7 +12,6 @@ class CalendarForm(forms.ModelForm):
 
 
 
-#форма события
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -22,8 +21,7 @@ class EventForm(forms.ModelForm):
         }
 
 
-
-#форма extra events 
+ 
 
 class ExtraEventForm(forms.ModelForm):
     class Meta:
