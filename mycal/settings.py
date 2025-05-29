@@ -40,11 +40,12 @@ INSTALLED_APPS = [
 
     'colorfield',
     'django.contrib.sites',
+    'events',
     'schedule',
     'recurrence'
 ]
 
-INSTALLED_APPS += ['events']
+
 
 SITE_ID = 1                   
 TIME_ZONE = 'Europe/Moscow' 

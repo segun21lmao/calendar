@@ -10,8 +10,6 @@ class CalendarForm(forms.ModelForm):
         fields = ("name", "slug")
 
 
-
-
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -21,7 +19,6 @@ class EventForm(forms.ModelForm):
         }
 
 
- 
 
 class ExtraEventForm(forms.ModelForm):
     class Meta:

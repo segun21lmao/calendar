@@ -1,18 +1,32 @@
+# events/views_calendar.py
 from django.shortcuts import render, redirect, get_object_or_404
-from schedule.models import Calendar
-from .forms import CalendarForm, EventForm, ExtraEventForm   
+from django.http import QueryDict
+
+from schedule.models import Calendar, Event          # модели пакета django-schedule
+from .forms import CalendarForm, EventForm, ExtraEventForm  # ваши формы
 
 
+# ------------------------------------------------------------------
+# Список календарей
+# ------------------------------------------------------------------
 def calendar_list(request):
     calendars = Calendar.objects.all()
-    return render(request,
-                  'events/calendar_list.html',
-                  {"calendars": calendars})
+    return render(
+        request,
+        'events/calendar_list.html',
+        {'calendars': calendars}
+    )
 
 
-
+# ------------------------------------------------------------------
+# Создание календаря
+# ------------------------------------------------------------------
 def create_calendar(request):
-    if request.method == "POST":
+    """
+    GET  → показать пустую форму.
+    POST → сохранить календарь и перейти к списку (PRG-паттерн).
+    """
+    if request.method == 'POST':
         form = CalendarForm(request.POST)
         if form.is_valid():
             form.save()
@@ -20,42 +34,43 @@ def create_calendar(request):
     else:
         form = CalendarForm()
 
-    return render(request,
-                  'events/create_calendar.html',
-                  {"form": form})
+    return render(
+        request,
+        'events/create_calendar.html',
+        {'form': form}
+    )
 
 
+# ------------------------------------------------------------------
+# Создание события
+# ------------------------------------------------------------------
+def create_event(request, cal_id: int):
+    calendar: Calendar = get_object_or_404(Calendar, id=cal_id)
 
-def create_event(request, cal_id):
-    calendar = get_object_or_404(Calendar, id=cal_id)
+    if request.method == 'POST':
+        # клонируем POST-данные и «подклеиваем» id календаря
+        data: QueryDict = request.POST.copy()
+        data['calendar'] = calendar.id
 
-    if request.method == "POST":
-        event_form = EventForm(request.POST)
+        event_form = EventForm(data)
         extra_form = ExtraEventForm(request.POST)
 
-        
-        event_form.data = event_form.data.copy()   
-        event_form.data['calendar'] = calendar.id
-
         if event_form.is_valid() and extra_form.is_valid():
-            ev = event_form.save()                
-            ex = extra_form.save(commit=False)     
-            ex.base = ev                           
-            ex.save()
+            event: Event = event_form.save()            # базовое событие
+            extra = extra_form.save(commit=False)       # доп. данные
+            extra.base = event
+            extra.save()
             return redirect('calendar_list')
     else:
-        event_form = EventForm(initial={"calendar": calendar})
+        event_form = EventForm(initial={'calendar': calendar.id})
         extra_form = ExtraEventForm()
 
-    return render(request,
-                  'events/create_event.html',
-                  {
-                      "calendar": calendar,
-                      "event_form": event_form,
-                      "extra_form": extra_form,
-                  })
-
-
-
-
-
+    return render(
+        request,
+        'events/create_event.html',
+        {
+            'calendar': calendar,
+            'event_form': event_form,
+            'extra_form': extra_form,
+        }
+    )
