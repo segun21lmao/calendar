@@ -38,12 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'colorfield',
     'django.contrib.sites',
+    'events',
     'schedule',
     'recurrence'
 ]
 
-INSTALLED_APPS += ['events']
+
 
 SITE_ID = 1                   
 TIME_ZONE = 'Europe/Moscow' 
@@ -64,7 +66,7 @@ ROOT_URLCONF = 'mycal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
