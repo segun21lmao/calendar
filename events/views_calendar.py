@@ -1,6 +1,6 @@
 # events/views_calendar.py
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import QueryDict
+from django.http import QueryDict, HttpRequest, HttpResponse 
 
 from schedule.models import Calendar, Event          # модели пакета django-schedule
 from .forms import CalendarForm, EventForm, ExtraEventForm  # ваши формы
@@ -9,12 +9,19 @@ from .forms import CalendarForm, EventForm, ExtraEventForm  # ваши форм�
 # ------------------------------------------------------------------
 # Список календарей
 # ------------------------------------------------------------------
-def calendar_list(request):
+def calendar_list(request: HttpRequest) -> HttpResponse:
     calendars = Calendar.objects.all()
+    
+    # Для отладки - добавьте переменные в контекст
+    debug_vars = request.META.keys() if hasattr(request, 'META') else []
+    
     return render(
         request,
-        'events/calendar_list.html',
-        {'calendars': calendars}
+        "events/calendar_list.html",
+        {
+            "calendars": calendars,
+            "debug_vars": debug_vars
+        },
     )
 
 

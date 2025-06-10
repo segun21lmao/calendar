@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'events',
     'schedule',
-    'recurrence'
+  
 ]
 
 
@@ -109,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization

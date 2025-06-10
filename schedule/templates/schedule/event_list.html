@@ -1,0 +1,10 @@
+<ul>
+  {% for event in object_list %}
+    <li>
+      <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+      {% if event.extraevent %}
+        - 💊 {{ event.extraevent.drugs }} ({{ event.extraevent.dose }})
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

@@ -23,4 +23,4 @@ class EventForm(forms.ModelForm):
 class ExtraEventForm(forms.ModelForm):
     class Meta:
         model = ExtraEvent
-        fields = ("address", "lesson_type")
+        fields = ("drugs", "dose")

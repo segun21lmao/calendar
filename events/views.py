@@ -1,7 +1,4 @@
 
-
-
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from schedule.models import Calendar, Event
@@ -102,3 +99,10 @@ def next7(request):
     return render(request, 'next7.html', {'occurrences': occurrences})
 
 # Create your views here.
+
+from schedule.views import CalendarView
+
+class CustomCalendarView(CalendarView):
+    def get_queryset(self):
+        return super().get_queryset().select_related("extraevent")
+
