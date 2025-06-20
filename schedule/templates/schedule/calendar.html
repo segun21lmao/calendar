@@ -19,7 +19,8 @@
         <li><a href="{% url "year_calendar" calendar.slug %}">{% trans "This Year" %}</a></li>
         <li><a href="{% url "week_calendar" calendar.slug %}">{% trans "Weekly" %}</a></li>
         <li><a href="{% url "day_calendar" calendar.slug %}">{% trans "Daily" %}</a></li>
-        <li><a href="{% url "upcoming_events_feed" calendar_id=calendar.id %}">{% trans "Feed" %}</a></li>
+        <li><a href="{% url 'create_event' cal_id=calendar.id %}"></a></li>
+        
     </ul>
 </div>
 

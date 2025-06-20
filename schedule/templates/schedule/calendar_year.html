@@ -3,6 +3,7 @@
 {% block body %}
 <div class="tablewrapper">
     <div class="calendarname">{{ calendar.name }}</div>
+    <a href="{% url 'create_event' cal_id=calendar.id %}">{% trans "Create Event" %}</a>
     {% prevnext "year_calendar" calendar period "Y" %}
     <div class="content">
       {% for month in period.get_months %}

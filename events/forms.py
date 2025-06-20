@@ -15,6 +15,8 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ("calendar", "title", "start", "end", "color_event")
         widgets = {
+            'start_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'end_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             "color_event": ColorWidget(attrs={"style": "width:6rem"})
         }
 

@@ -50,7 +50,12 @@ INSTALLED_APPS = [
 SITE_ID = 1                   
 TIME_ZONE = 'Europe/Moscow' 
 USE_TZ = True               
-
+DATETIME_INPUT_FORMATS = [
+    '%Y-%m-%d %H:%M:%S',
+    '%Y-%m-%d %H:%M',
+    '%d/%m/%Y %H:%M:%S',
+    '%d/%m/%Y %H:%M'
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
